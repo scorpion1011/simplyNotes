@@ -1,25 +1,26 @@
 <?php
 
+require_once '../core/view.php';
 require_once '../core/di.php';
 require_once '../core/pdoAdapter.php';
 
 $di = new Di();
 $di->adapter = PdoAdapter::getAdapter(require_once '../core/config.php');
 include '../controllers/controller_404.php';
-
+echo $_SERVER['REQUEST_URI'];
 switch ($_SERVER['REQUEST_URI']) 
 {
     case "/register":
         show_register();
         break;
     case "/login":
-        show_login();
+        require_once '../views/login.php';
         break;
     case "/home":
         show_home();
         break;
     default:
-        show_not_found();
+        require_once '../views/404.php';
         break;
 }
 
@@ -44,7 +45,6 @@ function show_not_found() {
     
     if(method_exists($controller, $action))
     {
-        // вызываем действие контроллера
         $controller->$action();
     }
     else

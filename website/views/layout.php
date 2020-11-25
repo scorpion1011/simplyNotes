@@ -9,9 +9,8 @@
     </head>
     
     <body>
-        <?php include '../views/'.$content_view;
-        
-        ?>
+        <?php //include '../views/'.$content_view;?>
+        {{ content }}
     </body>
 </html>
 
