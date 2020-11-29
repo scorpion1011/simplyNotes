@@ -6,5 +6,8 @@ class Model
 	{
 	}
 	
-	// todo select find update validate (abstract) dependency injection
+	// todo select find update validate (abstract) 
+	
+	
+	
 }

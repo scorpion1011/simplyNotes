@@ -2,10 +2,12 @@
 
 class PdoAdapter {
     protected static $adapter;
+    protected $dbh;
     
     protected function __construct($config) {
         // set connection to mysql with my config 
-        
+        $dsn = sprintf('mysql:dbname=%s;host=%s', $config['DB_DATABASE'], $config['DB_HOST']);
+        $this->dbh = new PDO($dsn, $config['DB_USERNAME'], $config['DB_PASSWORD']);
     }
     
     public static function getAdapter($config) {
@@ -13,15 +15,18 @@ class PdoAdapter {
         if (!PdoAdapter::$adapter) {
             PdoAdapter::$adapter = new PdoAdapter($config);
         }
+        return PdoAdapter::$adapter; 
     }
     
     public function read ($query, array $parameters) {
-        // todo
-        return [];
+        $sth = $this->dbh->prepare($query);
+        $sth->execute($parameters);
+        return $sth->fetchAll();
     }
     
     public function write ($query, array $parameters) {
-        // todo
-        return true;
+        $sth = $this->dbh->prepare($query);
+        $sth->execute($parameters);
+        return true; // ?
     }
 }
