@@ -2,29 +2,58 @@
 
 class Note
 {
+    protected $id;
+    protected $user_id;
+    protected $header;
+    protected $note;
     
-    public function select_all($user_id)
-    {
-        return $GLOBALS['di']->adapter->read("select * from Notes where Id_user = ?", [$user_id]);
+    public function __construct($user_id) {
+        $this->user_id = $user_id;
     }
     
-    public function select($id)
-    {
-        return $GLOBALS['di']->adapter->read("select * from Notes where Id = ?", [$id]);
+    public function setId($id) {
+        $this->id = $id;
     }
     
-    public function save($user_id, $header, $note)
-    {
-        return $GLOBALS['di']->adapter->write("insert into Notes (Id_user, Header, Note) values (?, ?, ?)", [$user_id, $header, $note]);
+    public function loadData (array $data) {
+        if(array_key_exists("header", $data)) {
+            $this->header = trim($data["header"]);
+        }
+        if(array_key_exists("note", $data)) {
+            $this->note = trim($data["note"]);
+        }
     }
     
-    public function edit($id, $header, $note)
+    public function select_all()
     {
-        return $GLOBALS['di']->adapter->write("update Notes set Header = ?, Note = ? where Id = ?", [$header, $note, $id]);
+        return $GLOBALS['di']->adapter->read("select * from Notes where Id_user = ?", [$this->user_id]);
     }
     
-    public function delete($id)
+    public function select()
     {
-        return $GLOBALS['di']->adapter->delete("delete from Notes where Id = ?", [$id]);
+        return $GLOBALS['di']->adapter->read("select * from Notes where Id = ?", [$this->id]);
+    }
+    
+    public function save()
+    {
+        if ($this->id) {
+            return $this->edit();
+        }
+        return $this->insert();
+    }
+    
+    protected function insert()
+    {
+        return $GLOBALS['di']->adapter->write("insert into Notes (Id_user, Header, Note) values (?, ?, ?)", [$this->user_id, $this->header, $this->note]);
+    }
+    
+    protected function edit()
+    {
+        return $GLOBALS['di']->adapter->write("update Notes set Header = ?, Note = ? where Id = ? and Id_user = ?", [$this->header, $this->note, $this->id, $this->user_id]);
+    }
+    
+    public function delete()
+    {
+        return $GLOBALS['di']->adapter->delete("delete from Notes where Id = ? and Id_user = ?", [$this->id, $this->user_id]);
     }
 }

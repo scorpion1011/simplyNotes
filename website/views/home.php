@@ -1,8 +1,11 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <strong><a class="navbar-brand" href="/">Home</a></strong>
+</nav>
 <table class="table table-striped" >
   <thead>
   <tr> 
     <td><a href="/edit" class="btn btn-primary">New Note</a></td>
-    <td align="right" ><button type="button" class="btn btn-danger">Log Out</button></td>
+    <td align="right" ><a href="/logout" class="btn btn-primary">Log Out</a></td>
   </tr>
   </thead>
   <tbody>

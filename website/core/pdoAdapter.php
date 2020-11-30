@@ -27,12 +27,17 @@ class PdoAdapter {
     public function write ($query, array $parameters) {
         $sth = $this->dbh->prepare($query);
         $sth->execute($parameters);
-        return true; // ?
+        return true;
+    }
+    
+    public function lastInsertedId () {
+        $stmt = $this->dbh->query("SELECT LAST_INSERT_ID()");
+        return $stmt->fetch();
     }
     
     public function delete ($query, array $parameters) {
         $sth = $this->dbh->prepare($query);
         $sth->execute($parameters);
-        return true; // ?
+        return true;
     }
 }
