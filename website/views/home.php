@@ -1,7 +1,7 @@
 <table class="table table-striped" >
   <thead>
   <tr> 
-    <td><button type="button" class="btn btn-primary">New Note</button></td>
+    <td><a href="/edit" class="btn btn-primary">New Note</a></td>
     <td align="right" ><button type="button" class="btn btn-danger">Log Out</button></td>
   </tr>
   </thead>
@@ -9,8 +9,10 @@
       <?php foreach ($notes as $note) { ?>
           <tr> 
             <td><?php echo $note["Header"] ?></td>
-            <td align="right" ><button type="button" class="btn btn-primary">Edit</button>
-              <button type="button" class="btn btn-danger">Delete</button></td>
+            <td align="right" >
+                <a href="/edit/<?php echo $note["Id"]?>" class="btn btn-primary">Edit</a>
+                <a href="/delete/<?php echo $note["Id"]?>" class="btn btn-danger">Delete</a>
+            </td>
           </tr>
           <tr> 
             <td colspan="2"><?php echo $note["Note"] ?></td>

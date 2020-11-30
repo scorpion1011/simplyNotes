@@ -1,6 +1,6 @@
 <?php 
 
-class User extends Model
+class User
 {
     
     public function get_data()

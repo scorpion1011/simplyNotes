@@ -29,4 +29,10 @@ class PdoAdapter {
         $sth->execute($parameters);
         return true; // ?
     }
+    
+    public function delete ($query, array $parameters) {
+        $sth = $this->dbh->prepare($query);
+        $sth->execute($parameters);
+        return true; // ?
+    }
 }
