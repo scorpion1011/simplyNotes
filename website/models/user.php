@@ -31,9 +31,9 @@ class User
         $number    = preg_match('@[0-9]@', $this->password);
         
         if(!$uppercase || !$lowercase || !$number || strlen($this->password) < 6 || strlen($this->login) < 6) {
-            $uppercase                   ?: $_SESSION['error'] .= 'use at least one uppercase<br/>';
-            $lowercase                   ?: $_SESSION['error'] .= 'use at least one lowercase<br/>';
-            $number                      ?: $_SESSION['error'] .= 'use at least one number<br/>';
+            $uppercase                   ?: $_SESSION['error'] .= 'password must have at least one uppercase<br/>';
+            $lowercase                   ?: $_SESSION['error'] .= 'password must have at least one lowercase<br/>';
+            $number                      ?: $_SESSION['error'] .= 'password must have at least one number<br/>';
             strlen($this->password) >= 6 ?: $_SESSION['error'] .= 'password must have at least 6 symbols<br/>';
             strlen($this->login) >= 6    ?: $_SESSION['error'] .= 'login must have at least 6 symbols<br/>';
             return false;

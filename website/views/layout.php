@@ -16,8 +16,9 @@
     </head>
     
     <body>
-        <?php //include '../views/'.$content_view;?>
-        {{ content }}
+        <div class="col-md-10 offset-1">
+            {{ content }}
+        </div>
     </body>
 </html>
 
