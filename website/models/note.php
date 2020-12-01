@@ -17,10 +17,10 @@ class Note
     
     public function loadData (array $data) {
         if(array_key_exists("header", $data)) {
-            $this->header = trim($data["header"]);
+            $this->header = htmlspecialchars(trim($data["header"]));
         }
         if(array_key_exists("note", $data)) {
-            $this->note = trim($data["note"]);
+            $this->note = htmlspecialchars(trim($data["note"]));
         }
     }
     

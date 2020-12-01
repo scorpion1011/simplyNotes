@@ -1,4 +1,5 @@
 <?php
+$page = 'register';
 require_once '../views/menu.php';
 require_once '../views/message.php';
 ?>

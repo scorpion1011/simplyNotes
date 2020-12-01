@@ -16,7 +16,9 @@
           <a class="navbar-brand <?php if ($page == 'edit') { echo 'font-weight-bold'; }?>" href="/edit/<?php echo $noteId; ?>">Edit Note</a>
         <?php 
           }
+        ?>
+          <a class="navbar-brand btn-danger navbar-right" href="/logout">Log Out</a>
+        <?php 
     }
     ?>
-    <a class="navbar-brand btn-danger navbar-right" href="/logout">Log Out</a>
 </nav>

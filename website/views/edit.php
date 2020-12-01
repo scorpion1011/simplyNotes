@@ -1,4 +1,9 @@
 <?php
+$page = 'new_note';
+if (isset($note)) {
+    $page = 'edit';
+    $noteId = $note["Id"];
+}
 require_once '../views/menu.php';
 require_once '../views/message.php';
 ?>
