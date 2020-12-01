@@ -31,7 +31,12 @@ class Note
     
     public function select()
     {
-        return $GLOBALS['di']->adapter->read("select * from notes where Id = ? and Id_user = ?", [$this->id, $this->user_id]);
+        $note = $GLOBALS['di']->adapter->read("select * from notes where Id = ? and Id_user = ?", [$this->id, $this->user_id]);
+        
+        if (array_key_exists(0, $note)) {
+            return $note[0];
+        }
+        return false;
     }
     
     public function save()

@@ -32,7 +32,7 @@ class PdoAdapter {
     
     public function lastInsertedId () {
         $stmt = $this->dbh->query("SELECT LAST_INSERT_ID()");
-        return $stmt->fetch();
+        return $stmt->fetchColumn();
     }
     
     public function delete ($query, array $parameters) {

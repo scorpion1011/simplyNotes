@@ -15,14 +15,19 @@ class User
     }
     public function select()
     {
-        return $GLOBALS['di']->adapter->read("select * from user where Login = ? and Password = ?", [$this->login, $this->hash_password($this->password)]);
+        $user = $GLOBALS['di']->adapter->read("select * from user where Login = ? and Password = ?", [$this->login, $this->hash_password($this->password)]);
+        
+        if (array_key_exists(0, $user)) {
+            return $user[0];
+        }
+        return false;
     }
     
     public function save()
     {
         $GLOBALS['di']->adapter->write("insert into user (Login, Password) values (?, ?)", [$this->login, $this->hash_password($this->password)]);
         $insertedUser = $GLOBALS['di']->adapter->lastInsertedId();
-        return $insertedUser[0];
+        return $insertedUser;
     }
     
     public function validate () {
@@ -39,7 +44,7 @@ class User
             return false;
         }
         
-        if (array_key_exists(0, $this->find())) {
+        if ($this->find()) {
             $_SESSION['error'] .= 'login already exists<br/>';
             return false;
         }
@@ -47,7 +52,11 @@ class User
     }
     
     protected function find() {
-        return $GLOBALS['di']->adapter->read("select * from user where Login = ?", [$this->login]);
+        $userId = $GLOBALS['di']->adapter->read("select * from user where Login = ?", [$this->login]);
+        if (array_key_exists(0, $userId)) {
+            return true;
+        }
+        return false;
     }
     
     protected function hash_password () {

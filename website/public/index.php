@@ -41,9 +41,9 @@ switch ($route[0])
         $userModel = new User();
         $userModel->loadData($_POST);
         $user = $userModel->select();
-        if (array_key_exists(0, $user))
+        if ($user)
         {
-            $_SESSION['user'] = $user[0]['Id'];
+            $_SESSION['user'] = $user['Id'];
             header('Location: /');
         }
         else {
@@ -81,7 +81,10 @@ switch ($route[0])
             $noteModel = new Note($_SESSION['user']);
             $noteModel->loadData($_POST);
             $noteModel->setId($route[1]);
-            $note = $noteModel->select()[0];
+            $note = $noteModel->select();
+            if (!$note) {
+                unset($note);
+            }
         }
         require_once '../views/edit.php';
         break;

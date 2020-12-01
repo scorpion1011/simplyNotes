@@ -4,11 +4,6 @@ require_once '../views/menu.php';
 require_once '../views/message.php';
 ?>
 <table class="table table-striped" >
-  <thead>
-  <tr> 
-    <td><a href="/edit" class="btn btn-primary">New Note</a></td>
-  </tr>
-  </thead>
   <tbody>
       <?php foreach ($notes as $note) { ?>
           <tr> 
