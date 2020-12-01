@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <strong><a class="navbar-brand" href="/login">Login</a></strong>
-  <a class="navbar-brand" href="/register">Register</a>
-</nav>
+<?php
+require_once '../views/menu.php';
+require_once '../views/message.php';
+?>
 <form action="/loginuser" method="post">
   <div class="form-group">
     <label for="login">Login:</label>

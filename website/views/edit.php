@@ -1,8 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Home</a>
-  <strong><a class="navbar-brand" href="/edit<?php if(isset($note)) { echo "/" . $note["Id"]; } ?>">
-    <?php if(isset($note)) { echo "Edit"; } else { echo "New Note"; }?></a></strong>
-</nav>
+<?php
+require_once '../views/menu.php';
+require_once '../views/message.php';
+?>
 <form action="/save<?php if(isset($note)) { echo "/" . $note["Id"]; } ?>" method="post">
   <div class="form-group">
     <label for="header">Header:</label>

@@ -12,4 +12,3 @@ if (array_key_exists('message', $_SESSION)) {
     <?php 
         unset($_SESSION['message']);
 }
-?>

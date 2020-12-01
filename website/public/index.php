@@ -12,11 +12,11 @@ $di = new Di();
 $di->adapter = PdoAdapter::getAdapter(require_once '../core/config.php');
 
 $route = explode('/', ltrim($_SERVER['REQUEST_URI'], '/'));
-require_once '../views/message.php';
 
 switch ($route[0]) 
 {
     case "register":
+        $page = 'register';
         require_once '../views/register.php';
         break;
     case "registeruser":
@@ -25,17 +25,21 @@ switch ($route[0])
         if ($userModel->validate()) {
             $userId = $userModel->save();
             $_SESSION['user'] = $userId;
+            $page = 'home';
             header('Location: /');
         }
         else {
+            $page = 'register';
             header('Location: /register');
         }
         break;
     case "login":
+        $page = 'login';
         require_once '../views/login.php';
         break;
     case "logout":
         unset($_SESSION['user']);
+        $page = 'home';
         header('Location: /');
         break;
     case "loginuser":
@@ -45,10 +49,12 @@ switch ($route[0])
         if (array_key_exists(0, $user))
         {
             $_SESSION['user'] = $user[0]['Id'];
+            $page = 'home';
             header('Location: /');
         }
         else {
             $_SESSION['error'] = 'wrong credentials';
+            $page = 'login';
             header('Location: /login');
         }
         break;
@@ -57,9 +63,11 @@ switch ($route[0])
         if (array_key_exists('user', $_SESSION)) {
             $noteModel = new Note($_SESSION['user']) ;
             $notes = $noteModel->select_all();
+            $page = 'home';
             require_once '../views/home.php';
         }
         else {
+            $page = 'login';
             header('Location: /login');
         }
         break;
@@ -74,6 +82,7 @@ switch ($route[0])
         else {
             $_SESSION['error'] = 'delete error. Wrong Id';
         }
+        $page = 'home';
         header('Location: /');
         break;
     case "edit":
@@ -83,9 +92,12 @@ switch ($route[0])
             $noteModel->loadData($_POST);
             $noteModel->setId($route[1]);
             $note = $noteModel->select()[0];
+            $page = 'edit';
+            $noteId = $note["Id"];
             require_once '../views/edit.php';
         }
         else {
+            $page = 'new_note';
             require_once '../views/edit.php';
         }
         break;
@@ -100,6 +112,7 @@ switch ($route[0])
             $_SESSION['message'] = 'insert success';
         }
         $noteModel->save();
+        $page = 'home';
         header('Location: /');
         break;
     default:

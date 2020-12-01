@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <strong><a class="navbar-brand" href="/">Home</a></strong>
-</nav>
+<?php
+require_once '../views/menu.php';
+require_once '../views/message.php';
+?>
 <table class="table table-striped" >
   <thead>
   <tr> 
     <td><a href="/edit" class="btn btn-primary">New Note</a></td>
-    <td align="right" ><a href="/logout" class="btn btn-primary">Log Out</a></td>
   </tr>
   </thead>
   <tbody>
