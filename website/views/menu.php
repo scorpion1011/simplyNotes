@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <?php
+    if (!isset($page)) {
+        $page = '';
+    }
     if (!array_key_exists('user', $_SESSION)) {
         ?> 
           <a class="navbar-brand <?php if ($page == 'login') { echo 'font-weight-bold'; }?>" href="/login">Login</a>
