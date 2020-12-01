@@ -31,7 +31,7 @@ class Note
     
     public function select()
     {
-        return $GLOBALS['di']->adapter->read("select * from notes where Id = ?", [$this->id]);
+        return $GLOBALS['di']->adapter->read("select * from notes where Id = ? and Id_user = ?", [$this->id, $this->user_id]);
     }
     
     public function save()
