@@ -21,7 +21,7 @@ Controller:
 Model:
 1) models are in folder "models"
 2) to communicate with DB, models use PdoAdapter object ( core/pdoAdapter.php ), that defines the basic operation like read and write
-3) PDOAdapter is a singleton 
+3) PdoAdapter is a singleton 
 4) models use dependency injection instance to get access to PdoAdapter object
 View:
 1) views are in folder "views"
